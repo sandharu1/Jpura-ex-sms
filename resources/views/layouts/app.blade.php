@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{URL::asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/custom.css') }}">
 
     <!-- Scripts -->
     <script>

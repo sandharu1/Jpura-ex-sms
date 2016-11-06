@@ -57,6 +57,7 @@
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+                display: inline-block;
             }
 
             .m-b-md {
@@ -91,11 +92,15 @@
                 </div>
 
                 <div class="links">
-                    <a href="#">Documentation</a>
-                    <a href="#">New Results</a>
+                    <a href="#"><marquee scrolldelay="200" scrollamount="3" direction="up" height="20">Documentation</marquee></a>
+                    <a href="#"><marquee scrolldelay="200" scrollamount="3" direction="up" height="20">Students Details</marquee></a>
+                    <a href="#"><marquee scrolldelay="200" scrollamount="3" direction="up" height="20">News</marquee></a>
+                    <a href="#"><marquee scrolldelay="200" scrollamount="3" direction="up" height="20">Exam Results</marquee></a>
+                    <a href="#"><marquee scrolldelay="200" scrollamount="3" direction="up" height="20">Time Tables</marquee></a>
+                   {{--  <a href="#">New Results</a>
                     <a href="#">News</a>
                     <a href="#">Exam Results</a>
-                    <a href="#">Time Tables</a>
+                    <a href="#">Time Tables</a> --}}
                 </div>
             </div>
         </div>

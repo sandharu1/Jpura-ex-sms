@@ -22,6 +22,13 @@
                       
                       <a href="Lecturer" class="btn btn-info">Go Lecturer Section</a>
                     </div>
+                    <hr>
+                    <div class="panel-body">
+                      <h1>Course & Marks</h1>
+                      <p class="lead">You ca add new lecturer, edit lecturer details, delete lecturer and view lecturer details.</p>
+                      
+                      <a href="Course" class="btn btn-info">Go Course & Marks Section</a>
+                    </div>
 
 
                 </div>

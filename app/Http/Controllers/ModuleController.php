@@ -3,34 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Courses;
 use App\Modules;
+use App\Courses;
 
 use App\Http\Requests;
 
-class CourseController extends Controller
+class ModuleController extends Controller
 {
-        /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $course = Courses::orderBy('id','DESC')->paginate(5);
-        $module = Modules::orderBy('id','DESC')->paginate(5);
-        return view('Course.index', compact('course','module'))
-        ->with('i', ($request->input('page', 1) -1) *5)
-        ->with('ii', ($request->input('page', 1) -1) *5);
+        //
     }
 
     /**
@@ -40,7 +27,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('Course.create');
+    	$programs = Courses::all(['program_id', 'name']);
+        return view('Module.create', compact('programs'));
     }
 
     /**
@@ -52,18 +40,17 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-        'name' => 'required',
-        'program_id' => 'required',
-        'credits' => 'required',
-        'year_commenced' => 'required'
-        ]);
-
-        Courses::create($request->all());
+            'name' => 'required',
+            'module_id' => 'required',
+            'programID' => 'required',
+            'credits' => 'required',
+            'year_commenced' => 'required'
+            ]);
+        // var_dump($request->all());
+        Modules::create($request->all());
         return redirect()->route('Course.index')
-                            ->with('success', 'Course create successfully');
-
+        ->with('success', 'Module create successfully');
     }
-
 
     /**
      * Display the specified resource.
@@ -84,10 +71,9 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //var_dump($id);
-        $program = Courses::where('program_id', '=', $id)->first();
-        // var_dump($program);
-        return view('Course.edit', compact('program'));
+        $moduleTable = Modules::where('module_id', '=', $id)->first();
+        $programs = Courses::all(['program_id', 'name']);
+        return view('Module.edit', compact('moduleTable', 'programs'));
     }
 
     /**
@@ -99,17 +85,18 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+      $this->validate($request, [
         'name' => 'required',
-        'program_id' => 'required',
+        'module_id' => 'required',
+        'programID' => 'required',
         'credits' => 'required',
         'year_commenced' => 'required'
         ]);
-        $programUpdate = Courses::where('program_id', '=', $id)->first();
-        $programUpdate->update($request->all());
-        return redirect()->route('Course.index')
-                            ->with('success', 'Program Update successfully');
-    }
+      $moduleUpdate = Modules::where('module_id', '=', $id)->first();
+      $moduleUpdate->update($request->all());
+      return redirect()->route('Course.index')
+      ->with('success', 'Module Update successfully');
+  }
 
     /**
      * Remove the specified resource from storage.
@@ -119,9 +106,9 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        $programDelete = Courses::where('program_id', '=', $id)->first();
-        $programDelete->delete();
+        $moduleDelete = Modules::where('module_id', '=', $id)->first();
+        $moduleDelete->delete();
         return redirect()->route('Course.index')
-                            ->with('success', 'Program Delete Successfully');
+        ->with('success', 'Module Delete Successfully');
     }
 }

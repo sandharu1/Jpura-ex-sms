@@ -24,3 +24,7 @@ Route::resource('/Student' , 'StudentController');
 Route::post('/getformdata', 'StudentController@studentid');
 
 Route::resource('/Course' , 'CourseController');
+
+Route::resource('/Module' , 'ModuleController');
+
+Route::resource('/Marks' , 'MarksController');
