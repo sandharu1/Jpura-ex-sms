@@ -12,7 +12,7 @@
                 <p><strong>NIC: </strong>{{ $stdInfo->nic }}</p>
                 <p><strong>Email: </strong>{{ $stdInfo->email }}</p>
                 <p><strong>Batch: </strong>{{ $stdInfo->batch }}</p>
-                <p><strong>Register No: </strong>{{ $stdInfo->reg_number }}</p>
+                <p><strong>Register No (ID): </strong>{{ $stdInfo->reg_number }}</p>
                 <p><strong>Res. Tel: </strong>{{ $stdInfo->res_tel }}</p>
                 <p><strong>Mobile Tel: </strong>{{ $stdInfo->mobile_tel }}</p>
                 <p><strong>Permenant Address: </strong>{{ $stdInfo->address }}</p>
@@ -43,9 +43,99 @@
 </div> {{-- end first row --}}
 <div class="row">
     <div class="container">
-
+    <h3>Programme Summary</h3>
+        <table class="table table-responsive">
+            <thead>
+                <tr class="info">
+                    <th>Academic Year</th>
+                    <th>Full/Part Time</th>
+                    <th>Level Description</th>
+                    <th>Student Status</th>
+                    <th>Year</th>
+                    <th>Programme code</th>
+                    <th>Major</th>
+                    <th>Award Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> {{-- end row --}}
+<div class="row">
+    <div class="container">
+    <h3>Overall Results Summary</h3>
+        <table class="table table-responsive">
+    <thead>
+        <tr class="info">
+            <th>Accademic Year</th>
+            <th>Programme</th>
+            <th>Major</th>
+            <th>Stage</th>
+            <th>Status</th>
+            <th>Stage GPA(Current)</th>
+            <th>Award Classification</th>
+            <th>Award GPA</th>
+            <th>Award Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td>John</td>
+            <td>Carter</td>
+            <td>johncarter@mail.com</td>
+            <td>1</td>
+            <td>John</td>
+            <td>Carter</td>
+            <td>3.2</td>
+            <td>2016-05-20</td>
+        </tr>
+    </tbody>
+</table>
     </div>
 </div> {{-- end second row --}}
+<div class="row">
+    <div class="container">
+        <h3>Module Details</h3>
+        <table class="table table-responsive">
+            <thead>
+                <tr class="info">
+                    <th>Semester</th>
+                    <th>Module</th>
+                    <th>Title</th>
+                    <th>Credit Value</th>
+                    <th>Stage</th>
+                    <th>Type</th>
+                    <th>Grade</th>
+                    <th>Pro. ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> {{-- end row --}}
 
 
 @endsection
