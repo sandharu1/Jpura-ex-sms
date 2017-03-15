@@ -26,6 +26,7 @@ class CreateStudentTable extends Migration
             $table->string('std_pic_name');
             $table->timestamps();
         });
+
     }
 
     /**

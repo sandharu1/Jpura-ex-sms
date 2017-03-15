@@ -29,6 +29,8 @@ class CreateModuleMarksTable extends Migration
             $table->foreign('moduleID')
                     ->references('module_id')->on('module')
                     ->onDelete('cascade');
+            $table->string('credit');
+            $table->string('gpa');
         });
     }
 

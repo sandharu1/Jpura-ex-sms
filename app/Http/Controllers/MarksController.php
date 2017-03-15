@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
 use App\Marks;
 use App\Modules;
+use App\Student;
 use Excel;
 
 class MarksController extends Controller
@@ -58,14 +59,28 @@ class MarksController extends Controller
                 'student_id' => 'required',
                 'moduleID' => 'required',
                 'mark' => 'required',
-                'grade' => 'required',
-                'attempt' => 'required',
                 'year' => 'required'
                 ]);
-            
+            // var_dump($this->grade($request->input('mark')));
+            // var_dump($request->all());
+            $request->merge($this->grade($request->input('mark')));
+            // var_dump($request->all());
+            //Add attempt Count
+            $calAttempt = Marks::where('student_id', '=', $request->student_id)
+            ->where('nic', '=', $request->nic)
+            ->where('moduleID', '=', $request->moduleID)
+            ->count();
+            // var_dump($calAttempt);
+            $request->merge(['attempt' => ++$calAttempt]);
+            //save recodes validating
+            if (Marks::create($request->all())) {
+                return redirect()->route('Course.index') 
+                ->with('success', 'Student marks insert successfully');
+            }else{
+                return redirect()->route('Course.index')
+                ->with('unsuccess', 'Error: Student marks insert unsuccessfully');
+            }
 
-            return redirect()->route('Course.index')
-            ->with('success', 'Module create successfully');
         }elseif ($request->type == "2") {
 
     /**
@@ -80,13 +95,49 @@ class MarksController extends Controller
         //var_dump($data);
         if(!empty($data) && $data->count()){
             foreach ($data as $key => $value) {
-                Marks::create(['nic' => $value->nic, 'student_id' => $value->student_id, 'moduleID' => $value->moduleid, 'mark' => $value->mark, 'attempt' => $value->attempt, 'grade' => $value->grade, 'year' => $value->year]);
+                $calAttempt = Marks::where('student_id', '=', $value->student_id)
+                ->where('nic', '=', $value->nic)
+                ->where('moduleID', '=', $value->moduleid)
+                ->count();
+                $arraydata = collect(array('nic' => $value->nic, 'student_id' => $value->student_id, 'moduleID' => $value->moduleid, 'mark' => $value->mark, 'attempt' => $calAttempt++, 'year' => $value->stage));
+                $functiondata = $this->grade($value->mark); 
+                //var_dump($functiondata);
+                $finalobject = $arraydata->merge($functiondata);
+               // var_dump($finalobject);
+                Marks::create($finalobject->toArray());
             }
+            // if (Marks::create($finalobject->toArray())) {
             return redirect()->route('Course.index')
             ->with('success', 'Import Data and create marks successfully');
+            // }else{
+            //   return redirect()->route('Course.index')
+            // ->with('unsuccess', 'Error: Import Data and create marks unsuccessfully');  
+            // }
+
         }
     }
     
+}elseif ($request->type == "3") {
+    $exBatch = $request->batch;
+    $exModule = $request->module;
+    $exStdList = array(array('nic', 'student_id', 'moduleid', 'mark', 'stage'));
+    $exStdData = Student::with('batchs')
+    ->where('batch', '=', $exBatch)
+    ->orderBy('reg_number','ASC')
+    ->get();
+    foreach ($exStdData as $key => $value) {
+        $exStdList [] = array($value->nic, $value->reg_number, $exModule, '', '');
+    }
+    // var_dump($exStdList); 
+    Excel::create('Filename', function($excel) use($exStdList) {
+
+        $excel->sheet('Sheetname', function($sheet) use($exStdList) {
+
+            $sheet->fromArray($exStdList, null, 'A1', false, false);
+
+        });
+
+    })->export('csv');
 }
 }
 
@@ -134,4 +185,35 @@ class MarksController extends Controller
     {
         //
     }
+
+    /**
+     * Convert marks to grade
+     *
+     * @param  int  $mark
+     * @return \Illuminate\Http\Response
+     */
+    public function grade($mark){
+        // return $te = $mark + 50;
+        if ($mark <= 100 && $mark >= 75) {
+           return array('grade' => 'A',
+               'credit' => '3',
+               'gpa' => '4');
+       }elseif ($mark <= 74 && $mark >= 60) {
+        return array('grade' => 'B',
+           'credit' => '3',
+           'gpa' => '3');
+    }elseif ($mark <= 59 && $mark >= 50) {
+        return array('grade' => 'C',
+           'credit' => '3',
+           'gpa' => '2');
+    }elseif ($mark <= 49 && $mark >= 30) {
+        return array('grade' => 'D',
+           'credit' => '3',
+           'gpa' => '1');
+    }elseif ($mark <= 29 && $mark >= 00) {
+        return array('grade' => 'E',
+           'credit' => '0',
+           'gpa' => '0');
+    }
+}
 }
