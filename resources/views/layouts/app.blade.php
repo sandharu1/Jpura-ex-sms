@@ -85,5 +85,8 @@
     <script src="{{ URL::asset('js/app.js') }}"></script>
     {{-- <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> --}}
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/particles.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/particles-custom-in.js') }}"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> --}}
 </body>
 </html>

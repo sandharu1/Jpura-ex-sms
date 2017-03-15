@@ -9,7 +9,7 @@
             <label for="name">Program Name: </label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Program Name" value="{{ old('name') }}" required autofocus>
         </div>
-               <div class="form-inline">
+        <div class="form-inline">
 
             <label for="program_id">Program ID: </label>
             <input type="text" class="form-control" name="program_id" id="program_id" placeholder="Program ID" value="{{ old('program_id') }}">
@@ -20,7 +20,7 @@
             <label for="year_commenced">Year Commenced: </label>
             <input type="text" class="form-control" name="year_commenced" id="year_commenced" placeholder="Year Commenced" value="{{ old('year_commenced') }}">
         </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
 @endsection

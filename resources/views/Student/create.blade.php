@@ -22,11 +22,9 @@
 	  <div class="form-inline"> --}}
             <label for="batch">Batch: </label>
             <select class="form-control" id="batch" name="batch" value="{{ old('batch') }}">
-                <option>Mgt. 16.1</option>
-                <option>Mgt. 15.2</option>
-                <option>MBA B03</option>
-                <option>BA in English B01</option>
-                <option>BC B03</option>
+                <option>CN13-1</option>
+                <option>CS13-1</option>
+                <option>MBA-B03</option>
             </select>
         </div>
 
